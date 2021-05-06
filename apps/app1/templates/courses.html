@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+    <title>Cursos</title>
+</head>
+
+<body>
+    <div class="container-primary m-5">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h2>Nuevo Curso</h2>
+            <h4>Nombre</h4>
+            <input type="" name="nombre">
+            <h4>Descripción</h4>
+            <textarea name="descripcion" id="" cols="30" rows="2" style="resize: none;"></textarea>
+   
+
+            <input type="hidden" name="nuevo" value="True" />
+            <button type="submit">Añadir Nuevo Curso</button>
+
+        </form>
+
+        {% if messages %}
+        <ul class="text-danger">
+            {% for m in messages %}
+            <li> {{m}} </li>
+            {% endfor %}
+        </ul>
+        {% endif%}
+
+
+        <h1>Todos los Cursos</h1>
+        <table class="table table-primary">
+
+            <tr>
+                <th scope="col">Nombre del Curso</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Fecha incorporación</th>
+                <th scope="col">Acciones</th>
+            </tr>
+            {% for c in courses %}
+            <tr class="">
+                <td class="bg-light">{{ c.name }} </td>
+                <td class="bg-light"> {{  c.description.description }}</td>
+                <td class="bg-light">{{ c.created_at | date:"M d, Y" }} </td>
+                <td class="bg-light"><a href="courses/destroy/{{ c.id }}">Eliminar</a></td>
+                {% endfor %}
+            </tr>
+        </table>
+  
+    </div>
+</body>
+
+</html>
